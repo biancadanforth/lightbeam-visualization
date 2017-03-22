@@ -40,12 +40,14 @@
 // Connection.CACHEABLE = 13;
 // Connection.FROM_PRIVATE_MODE = 14;
 
-init();
+let siteData = init();
+console.log(siteData);
 
 function init() {
 	loadJSON(function(response) {
 		// Parse JSON string into object
 		var data = JSON.parse(response);
+		
 		let visitedSites = {
 			'google.com': {},
 			'amazon.com': {},
@@ -73,20 +75,49 @@ function init() {
 
 		console.log('Third party sites by visited site: ', visitedSites);
 
-		// // find out how many sites each third party site links to
-		// for (let currentSite in visitedSites) {
-		// 	for (let j = 0; j < data.length; j++) {
-		// 		// source website is index 0 for each ith array in data
-		// 		let source = data[j][0];
-		// 		// target website is index 1 for each ith array in data
-		// 		let target = data[j][1];
-		// 		// if one of the third parties links to another third party
-		// 		if (source !== target && visitedSites[currentSite].hasOwnProperty(source)) {
-		// 			visitedSites[currentSite][source] = target;
-		// 		}
-		// 	}
-		// }
-		// console.log('Third party sites and their third party sites, by visited site', visitedSites);
+		// get path element from DOM based on title attribute
+		let pathElements = [];
+
+		let pathSVGElements = document.getElementsByClassName('site');
+		console.log(pathSVGElements);
+
+		for (let k = 0; k < pathSVGElements.length; k++) {
+			pathElements.push(pathSVGElements[k].getElementsByTagName('path'));
+		}
+
+		//convert array of HTML collection objects into a single array of path elements
+		pathElements = pathElements.reduce(function(a, b) {return [...a, ...b];
+}, []);
+
+		for (let l = 0; l < pathElements.length; l++) {
+			pathElements[l].addEventListener('click', function() {
+					updateSideBar(pathElements[l]);
+				}
+			);
+		}
+
+		let thirdPartySpan = document.getElementById("third-party-site");
+		let thirdPartyAboutSpan = document.getElementById("third-party-site-about");
+		let visitedSiteSpan = document.getElementById("visited-site");
+		let prevPathElement;
+
+		function updateSideBar(pathElement) {
+			if (!prevPathElement) {
+				prevPathElement = pathElement;
+			} else if (prevPathElement !== pathElement) {
+				prevPathElement.classList.remove('active');
+				prevPathElement = pathElement;
+			}
+				thirdPartySpan.innerText = pathElement.textContent;
+			thirdPartyAboutSpan.innerText = pathElement.textContent;
+			// get parentElement to pathElement (<svg>)
+			let parentSVG = pathElement.nearestViewportElement;
+			// then get siblingElement to parentElement (<a>)
+			let siblingElement = parentSVG.nextElementSibling;
+			// then get the value of the title attribute
+			visitedSiteSpan.innerText = siblingElement.getAttribute('title');
+			pathElement.classList.add('active');
+		}
 	});
 }
 
