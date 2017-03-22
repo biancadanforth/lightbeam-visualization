@@ -71,22 +71,22 @@ function init() {
 			}
 		}
 
-		//console.log('Third party sites by visited site: ', visitedSites);
+		// //console.log('Third party sites by visited site: ', visitedSites);
 
-		// find out how many sites each third party site links to
-		for (let currentSite in visitedSites) {
-			for (let j = 0; j < data.length; j++) {
-				// source website is index 0 for each ith array in data
-				let source = data[j][0];
-				// target website is index 1 for each ith array in data
-				let target = data[j][1];
-				// if one of the third parties links to another third party
-				if (source !== target && visitedSites[currentSite].hasOwnProperty(source)) {
-					visitedSites[currentSite][source] = target;
-				}
-			}
-		}
-		console.log('Third party sites and their third party sites, by visited site', visitedSites);
+		// // find out how many sites each third party site links to
+		// for (let currentSite in visitedSites) {
+		// 	for (let j = 0; j < data.length; j++) {
+		// 		// source website is index 0 for each ith array in data
+		// 		let source = data[j][0];
+		// 		// target website is index 1 for each ith array in data
+		// 		let target = data[j][1];
+		// 		// if one of the third parties links to another third party
+		// 		if (source !== target && visitedSites[currentSite].hasOwnProperty(source)) {
+		// 			visitedSites[currentSite][source] = target;
+		// 		}
+		// 	}
+		// }
+		// console.log('Third party sites and their third party sites, by visited site', visitedSites);
 	});
 }
 
