@@ -71,7 +71,7 @@ function init() {
 			}
 		}
 
-		// //console.log('Third party sites by visited site: ', visitedSites);
+		console.log('Third party sites by visited site: ', visitedSites);
 
 		// // find out how many sites each third party site links to
 		// for (let currentSite in visitedSites) {
