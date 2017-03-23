@@ -58,7 +58,7 @@ I use [SemVer](http://semver.org/) for versioning.
 
 * **Bianca Danforth** - *Initial work* - [biancadanforth](https://github.com/biancadanforth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/biancadanforth/lightbeam-visualization/contributors) who participated in this project.
 
 ## License
 
