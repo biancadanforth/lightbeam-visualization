@@ -34,12 +34,23 @@ function lightbeamVis() {
 		);
 	}
 
-	// Back-to-top link
+	/* Back to top link resets scroll position */
 	const backToTop = document.getElementById('back-to-top');
 	backToTop.onclick = scrollToTop;
 
 	function scrollToTop() {
 		window.scrollTo(0,0);
+	}
+
+/* --- Deselect third party pie slice on clicking away ---*/
+	document.body.addEventListener('click', deselectSlice, true);
+
+	function deselectSlice(e) {
+		if (e.target.id.indexOf('chart') === -1) {
+			for (let m = 0; m < pathElements.length; m++) {
+				pathElements[m].classList.remove('active');
+			}
+		}
 	}
 
 
