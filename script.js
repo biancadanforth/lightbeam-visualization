@@ -58,6 +58,7 @@ function lightbeamVis() {
 
 	function closeSideBar() {
 		sidePanel.classList.add('hidden');
+		scrollToTop();
 	}
 
 
