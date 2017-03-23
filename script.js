@@ -34,6 +34,15 @@ function lightbeamVis() {
 		);
 	}
 
+	// Back-to-top link
+	const backToTop = document.getElementById('back-to-top');
+	backToTop.onclick = scrollToTop;
+
+	function scrollToTop() {
+		window.scrollTo(0,0);
+	}
+
+
 	/* -------- LOAD DATA ---------- */
 
 	loadJSON();
@@ -108,6 +117,9 @@ function lightbeamVis() {
 		// update data sent value in side panel
 		dataSentSpan.innerText = visitedSites[visitedSite][thirdPartySite];
 		pathElement.classList.add('active');
+		// on larger screen widths, this has no effect
+		// for smaller screen widths, this scrolls to the bottom of the page where the side panel is located
+		window.scrollTo(0, 10000);
 	}
 }
 

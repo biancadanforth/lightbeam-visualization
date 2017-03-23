@@ -1,6 +1,15 @@
 /* style.css */
 
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+svg {
+	box-sizing: content-box;
+}
+
 body {
+	max-width: 100vw;
 	margin: 0;
 	background-color: #1f1f1f;
 	display: flex;
@@ -24,9 +33,16 @@ main {
 	flex-basis: 67%;
 	flex-grow: 1;
 	display: flex;
-	height: 100vh;
-	flex-flow: column wrap;
+	flex-flow: row wrap;
 	justify-content: space-between;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+	main {
+		height: 100vh;
+	}
 }
 
 .legend {
@@ -39,6 +55,15 @@ main {
 	border-radius: 5px;
 }
 
+@media (max-width: 500px) {
+	.legend {
+		max-width: 100%;
+		width: 100%;
+		margin: 0;
+		border-radius: 0;
+	}
+}
+
 .legend h4 {
 	margin-top: 0;
 	border-bottom: 1px solid #f9f9f9;
@@ -49,7 +74,7 @@ main {
 	padding-left: 40px;
 }
 
-p::before {
+.legend p::before {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -79,7 +104,7 @@ p.gstaticCom::before {
 	background-color: #323232;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 	body {
 		flex-direction: column;
 	}
@@ -108,21 +133,28 @@ main h1 {
 	text-align: right;
 }
 
+
+
 .bottom-wrapper {
 	display: flex;
+	flex-grow: 1;
 	justify-content: space-between;
 	align-items: flex-end;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
 	.bottom-wrapper {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}
 
+	main h1 {
+		text-align: center;
+	}
+
 	.legend {
-		align-self: flex-start;
+		margin: 0 0 30px;
 	}
 }
 
@@ -130,7 +162,17 @@ main h1 {
 	position: relative;
 	top: 0;
 	left: 0;
+	height: 248px;
 	display: inline-block;
+}
+
+.visualization-wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	margin: 30px;
+	width: 100%;
 }
 
 svg.site {
@@ -200,4 +242,19 @@ path.active {
 svg.site path:hover {
 	stroke-width: 5px;
 	stroke: #565656;
+}
+
+.back-to-top {
+	display: none;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: .875em;
+}
+
+@media (max-width: 900px) {
+	.back-to-top {
+		display: block;
+	}
 }
