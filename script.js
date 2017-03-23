@@ -12,6 +12,7 @@ function lightbeamVis() {
 	let thirdPartySpan = document.getElementById("third-party-site");
 	let thirdPartyAboutSpan = document.getElementById("third-party-site-about");
 	let visitedSiteSpan = document.getElementById("visited-site");
+	let dataSentSpan = document.getElementById('data-sent');
 	let prevPathElement;
 	let sidePanel = document.getElementById('side-panel');
 
@@ -57,16 +58,24 @@ function lightbeamVis() {
 		// populate visitedSites from JSON data
 		// each element in each array is a unique third-party site linked to by the visited site key.
 		for (let currentSite in visitedSites) {
+			let dataSent = 0;
 			for (let j = 0; j < data.length; j++) {
 				// source website is index 0 for each ith array in data
 				let source = data[j][0];
 				// target website is index 1 for each ith array in data
 				let target = data[j][1];
+				// check if target has a subdomain and remove it e.g. remove x in 'x.cloudfront.net'.
+				let arrayOfStrings = target.split('.');
+				if (arrayOfStrings.length > 2) {
+					arrayOfStrings.splice(0, 1);
+					target = arrayOfStrings.join('.');
+				}
 				// if there's a third-party source
 				if (source === currentSite && target !== currentSite) {
 					// if third-party site is not yet captured
 					if (!visitedSites[currentSite].hasOwnProperty(target)) {
-						visitedSites[currentSite][target] = [];
+						dataSent += 3;
+						visitedSites[currentSite][target] = dataSent;
 					}
 				}
 			}
@@ -85,14 +94,19 @@ function lightbeamVis() {
 			prevPathElement.classList.remove('active');
 			prevPathElement = pathElement;
 		}
-			thirdPartySpan.innerText = pathElement.textContent;
-		thirdPartyAboutSpan.innerText = pathElement.textContent;
+		// update third party value in side panel
+		let thirdPartySite = pathElement.textContent;
+			thirdPartySpan.innerText = thirdPartySite;
+		thirdPartyAboutSpan.innerText = thirdPartySite;
 		// get parentElement to pathElement (<svg>)
 		let parentSVG = pathElement.nearestViewportElement;
 		// then get siblingElement to parentElement (<a>)
 		let siblingElement = parentSVG.nextElementSibling;
-		// then get the value of the title attribute
-		visitedSiteSpan.innerText = siblingElement.getAttribute('title');
+		// then get the value of the title attribute, which corresponds to the visited site name string
+		let visitedSite = siblingElement.getAttribute('title');
+		visitedSiteSpan.innerText = visitedSite;
+		// update data sent value in side panel
+		dataSentSpan.innerText = visitedSites[visitedSite][thirdPartySite];
 		pathElement.classList.add('active');
 	}
 }
