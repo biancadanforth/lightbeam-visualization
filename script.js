@@ -53,6 +53,13 @@ function lightbeamVis() {
 		}
 	}
 
+	let closeButton = document.getElementById('close');
+	closeButton.onclick = closeSideBar;
+
+	function closeSideBar() {
+		sidePanel.classList.add('hidden');
+	}
+
 
 	/* -------- LOAD DATA ---------- */
 
