@@ -6,16 +6,6 @@ A visualization prototype for the Mozilla Firefox add-on, Lightbeam.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-You need to run the files off a web server to properly load the lightbeamData.JSON file.  I used Python SimpleHTTPServer. See their documentation for how to set it up initially, but here's a post-set-up example to run the server.
-
-```
-cd path-to-project-directory
-
-python -m SimpleHTTPServer
-```
-
 ### Installing
 
 1. Clone the repository in Git.
@@ -24,7 +14,17 @@ python -m SimpleHTTPServer
 git clone https://github.com/biancadanforth/lightbeam-visualization.git
 ```
 
-2. View the index.html file in a browser of your choice (Firefox recommended).
+2. Set up a web server.
+
+You need to run the files off a web server to properly load the lightbeamData.JSON file.  I used Python SimpleHTTPServer. See their documentation for how to set it up initially, but here's a post-set-up example to run the server.
+
+```
+cd lightbeam-visualization
+
+python -m SimpleHTTPServer
+```
+
+3. View the index.html file in a browser of your choice (Firefox recommended).
 
 ```
 http://localhost:8000/
@@ -36,15 +36,12 @@ The raw Lightbeam data (lightbeamData.JSON) that this prototype is based on can 
 
 You can view the list of third-party sites and their faux 'POST' request packet sizes I extracted from the raw data in the browser's console.
 
-## Deployment
-
-Simply FTP the root folder contents (/images subfolder excepted) to your chosen site.
-
 ## Built With
 
 * JavaScript
 * CSS3
 * HTML5
+* Inkscape
 
 ## Contributing
 
