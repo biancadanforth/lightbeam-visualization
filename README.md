@@ -66,4 +66,4 @@ This project is licensed under the Mozilla Public License Version 2.0 - see the 
 
 ## Acknowledgments
 
-* You know who you are!
+* This README extended from a template by [PurpleBooth](https://github.com/PurpleBooth).
